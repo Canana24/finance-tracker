@@ -27,6 +27,9 @@ namespace FinanceTracker.API.Services
 
         public async Task<CategoryResponseDto> CreateCategory(CreateCategoryDto dto, int userId)
         {
+            if (dto.Type != "INCOME" && dto.Type != "EXPENSE")
+                throw new ArgumentException("El tipo debe ser INCOME o EXPENSE.");
+
             var category = new Category
             {
                 UserId = userId,
