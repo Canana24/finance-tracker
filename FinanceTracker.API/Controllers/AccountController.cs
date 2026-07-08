@@ -62,7 +62,7 @@ namespace FinanceTracker.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAccount(int id)
         {
             var deleted = await _accountService.DeleteAccount(id, GetUserId());
 
