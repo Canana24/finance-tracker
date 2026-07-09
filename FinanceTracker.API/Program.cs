@@ -1,7 +1,6 @@
 using FinanceTracker.API.Configuration;
 using FinanceTracker.API.Data;
 using FinanceTracker.API.Middlewares;
-using FinanceTracker.API.Models;
 using FinanceTracker.API.Repositories;
 using FinanceTracker.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +14,7 @@ var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSetting
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddHttpClient();
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

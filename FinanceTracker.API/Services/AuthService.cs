@@ -2,14 +2,13 @@
 using FinanceTracker.API.Data;
 using FinanceTracker.API.DTOs.Auth;
 using FinanceTracker.API.Models;
-using FinanceTracker.API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace FinanceTracker.API.Models
+namespace FinanceTracker.API.Services
 {
     public class AuthService : IAuthService
     {

@@ -17,7 +17,9 @@ public partial class Currency
 
     public virtual ICollection<Budget> Budgets { get; set; } = new List<Budget>();
 
-    public virtual ICollection<ExchangeRate> ExchangeRates { get; set; } = new List<ExchangeRate>();
+    public virtual ICollection<ExchangeRate> ExchangeRateBaseCurrencies { get; set; } = new List<ExchangeRate>();
+
+    public virtual ICollection<ExchangeRate> ExchangeRateCurrencies { get; set; } = new List<ExchangeRate>();
 
     public virtual ICollection<SavingsGoal> SavingsGoals { get; set; } = new List<SavingsGoal>();
 

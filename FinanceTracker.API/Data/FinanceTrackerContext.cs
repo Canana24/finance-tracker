@@ -44,7 +44,7 @@ public partial class FinanceTrackerContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            // Configuracion en Program.cs
+            // La configuración se hace desde Program.cs
         }
     }
 
@@ -140,11 +140,15 @@ public partial class FinanceTrackerContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__Exchange__3214EC07067212F4");
 
             entity.Property(e => e.Date)
-                .HasDefaultValueSql("(getdate())")
+                .HasDefaultValueSql("(getdate())", "DF__ExchangeRa__Date__00200768")
                 .HasColumnType("datetime");
             entity.Property(e => e.Rate).HasColumnType("decimal(18, 6)");
 
-            entity.HasOne(d => d.Currency).WithMany(p => p.ExchangeRates)
+            entity.HasOne(d => d.BaseCurrency).WithMany(p => p.ExchangeRateBaseCurrencies)
+                .HasForeignKey(d => d.BaseCurrencyId)
+                .HasConstraintName("FK_ExchangeRates_BaseCurrency");
+
+            entity.HasOne(d => d.Currency).WithMany(p => p.ExchangeRateCurrencies)
                 .HasForeignKey(d => d.CurrencyId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ExchangeRates_Currencies");

@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 **/appsettings.Development.json
 **/appsettings.*.json
 !**/appsettings.json
+
+# Archivos locales que no van al repo
+InfoRelevante.txt

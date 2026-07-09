@@ -108,15 +108,34 @@ CREATE TABLE Transactions (
 );
 GO
 
-CREATE TABLE ExchangeRates (
-    Id          INT IDENTITY(1,1) PRIMARY KEY,
-    CurrencyId  INT            NOT NULL,
-    Rate        DECIMAL(18,6)  NOT NULL,
-    Date        DATETIME       NOT NULL DEFAULT GETDATE(),
+CREATE TABLE [dbo].[ExchangeRates](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CurrencyId] [int] NOT NULL,
+	[BaseCurrencyId] [int] NULL,
+	[Rate] [decimal](18, 6) NOT NULL,
+	[Date] [datetime] NOT NULL,
+ CONSTRAINT [PK__Exchange__3214EC07067212F4] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
-    CONSTRAINT FK_ExchangeRates_Currencies
-        FOREIGN KEY (CurrencyId) REFERENCES Currencies(Id)
-);
+ALTER TABLE [dbo].[ExchangeRates] ADD  CONSTRAINT [DF__ExchangeRa__Date__00200768]  DEFAULT (getdate()) FOR [Date]
+GO
+
+ALTER TABLE [dbo].[ExchangeRates]  WITH CHECK ADD  CONSTRAINT [FK_ExchangeRates_BaseCurrency] FOREIGN KEY([BaseCurrencyId])
+REFERENCES [dbo].[Currencies] ([Id])
+GO
+
+ALTER TABLE [dbo].[ExchangeRates] CHECK CONSTRAINT [FK_ExchangeRates_BaseCurrency]
+GO
+
+ALTER TABLE [dbo].[ExchangeRates]  WITH CHECK ADD  CONSTRAINT [FK_ExchangeRates_Currencies] FOREIGN KEY([CurrencyId])
+REFERENCES [dbo].[Currencies] ([Id])
+GO
+
+ALTER TABLE [dbo].[ExchangeRates] CHECK CONSTRAINT [FK_ExchangeRates_Currencies]
 GO
 ----
 CREATE TABLE SavingsGoals (
