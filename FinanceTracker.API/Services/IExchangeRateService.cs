@@ -1,10 +1,12 @@
-﻿using FinanceTracker.API.Models;
+﻿using FinanceTracker.API.DTOs.ExchangeRate;
+using FinanceTracker.API.Models;
 
 namespace FinanceTracker.API.Services
 {
     public interface IExchangeRateService
     {
-        Task<IEnumerable<ExchangeRate>> RefreshRatesFromFrankfurter(string baseCurrency);
-        Task<IEnumerable<ExchangeRate>> GetLatestRates();
+        Task<IEnumerable<ExchangeRateResponseDto>> RefreshRatesFromFrankfurter(string baseCurrency);
+        Task<IEnumerable<ExchangeRateResponseDto>> GetLatestRates();
+        Task<IEnumerable<ExchangeRateResponseDto>> RefreshRatesFromUruguayApi();
     }
 }
