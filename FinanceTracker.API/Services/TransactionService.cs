@@ -215,6 +215,7 @@ namespace FinanceTracker.API.Services
                 Id = transaction.Id,
                 AccountId = transaction.AccountId,
                 AccountName = transaction.Account?.Name ?? string.Empty,
+                CategoryId = transaction.CategoryId,
                 CategoryName = transaction.Category?.Name ?? string.Empty,
                 Amount = transaction.Amount,
                 Type = transaction.Type,

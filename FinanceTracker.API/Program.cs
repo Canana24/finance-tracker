@@ -83,10 +83,22 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// CORS: permite que Angular consuma la API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")  // origen
+              .AllowAnyHeader()                       
+              .AllowAnyMethod(); // permite GET, POST, PUT, DELETE
+    });
+});
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+// Swagger solo en desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -94,6 +106,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAngular");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

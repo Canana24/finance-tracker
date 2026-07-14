@@ -1,0 +1,56 @@
+:root {
+  /* Superficies */
+  --bg:            #F7F8FA;
+  --surface:       #FFFFFF;
+  --border:        #E4E7EC;
+  --border-strong: #D0D5DD;
+
+  /* Texto */
+  --ink:       #101828;
+  --ink-2:     #475467;
+  --ink-3:     #98A2B3;
+
+  /* Acción */
+  --accent:       #2B50D8;
+  --accent-hover: #2140B5;
+  --accent-tint:  #EEF2FF;
+
+  /* Semántica — SOLO sobre números */
+  --income:       #067647;
+  --income-tint:  #ECFDF3;
+  --expense:      #B42318;
+  --expense-tint: #FEF3F2;
+  --warning:      #B54708;
+  --warning-tint: #FFFAEB;
+
+  /* Espaciado — escala de 4 */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;
+  --s-4: 16px;  --s-6: 24px;  --s-8: 32px;
+  --s-12: 48px; --s-16: 64px;
+
+  /* Radios */
+  --r-sm:   6px;   /* badges */
+  --r:      8px;   /* botones, inputs */
+  --r-lg:   12px;  /* tarjetas */
+  --r-full: 999px; /* pills */
+
+  /* Sombras — casi nunca */
+  --shadow-pop: 0 8px 24px rgba(16,24,40,.10), 0 2px 6px rgba(16,24,40,.06);
+
+  /* Tipografía */
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Alturas de control */
+  --h-control: 44px;   /* mobile: mínimo táctil */
+}
+
+/* Clase para TODA cifra monetaria */
+.amount {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.amount--in  { color: var(--income);  }
+.amount--out { color: var(--expense); }
