@@ -1,0 +1,94 @@
+/* ============================================
+   BOTONES
+   ============================================ */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  height: var(--h-control);
+  padding: 0 var(--s-4);
+  border: 1px solid transparent;
+  border-radius: var(--r);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.button--primary {
+  background: var(--accent);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: var(--accent-hover);
+  }
+}
+
+.button--secondary {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--border-strong);
+
+  &:hover:not(:disabled) {
+    background: var(--bg);
+  }
+}
+
+.button--full {
+  width: 100%;
+}
+
+/* ============================================
+   CAMPOS DE FORMULARIO
+   ============================================ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin-bottom: var(--s-4);
+}
+
+.field__label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.field__input {
+  height: var(--h-control);
+  padding: 0 var(--s-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(43, 80, 216, 0.12);
+  }
+
+  /* El input inválido se marca SOLO si el usuario ya lo tocó */
+  &[aria-invalid='true'] {
+    border-color: var(--expense);
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+    }
+  }
+}
+
+.field__error {
+  font-size: 13px;
+  color: var(--expense);
+}

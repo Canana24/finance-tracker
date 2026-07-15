@@ -1,27 +1,36 @@
 :root {
+  /* ═══════════ TEMA OSCURO (por defecto) ═══════════ */
+
   /* Superficies */
-  --bg:            #F7F8FA;
-  --surface:       #FFFFFF;
-  --border:        #E4E7EC;
-  --border-strong: #D0D5DD;
+  --bg:            #0D1117;
+  --surface:       #161B22;
+  --surface-2:     #1F2530;
+  --border:        #2A313C;
+  --border-strong: #3B434F;
 
   /* Texto */
-  --ink:       #101828;
-  --ink-2:     #475467;
-  --ink-3:     #98A2B3;
+  --ink:       #E6EDF3;
+  --ink-2:     #9BA7B4;
+  --ink-3:     #6E7A88;
 
   /* Acción */
-  --accent:       #2B50D8;
-  --accent-hover: #2140B5;
-  --accent-tint:  #EEF2FF;
+  --accent:       #4E6DF5;
+  --accent-hover: #6580FF;
+  --accent-text:  #93A6FF;
+  --accent-tint:  rgba(78, 109, 245, 0.16);
 
   /* Semántica — SOLO sobre números */
-  --income:       #067647;
-  --income-tint:  #ECFDF3;
-  --expense:      #B42318;
-  --expense-tint: #FEF3F2;
-  --warning:      #B54708;
-  --warning-tint: #FFFAEB;
+  --income:       #3FB950;
+  --income-tint:  rgba(63, 185, 80, 0.16);
+  --expense:      #F85149;
+  --expense-tint: rgba(248, 81, 73, 0.16);
+  --warning:      #D29922;
+  --warning-tint: rgba(210, 153, 34, 0.16);
+
+  /* Sombras */
+  --shadow-pop: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+  /* ═══════════ Tokens que NO cambian con el tema ═══════════ */
 
   /* Espaciado — escala de 4 */
   --s-1: 4px;   --s-2: 8px;   --s-3: 12px;
@@ -34,15 +43,45 @@
   --r-lg:   12px;  /* tarjetas */
   --r-full: 999px; /* pills */
 
-  /* Sombras — casi nunca */
-  --shadow-pop: 0 8px 24px rgba(16,24,40,.10), 0 2px 6px rgba(16,24,40,.06);
-
   /* Tipografía */
   --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   /* Alturas de control */
   --h-control: 44px;   /* mobile: mínimo táctil */
+}
+
+:root[data-theme="light"] {
+  /* ═══════════ TEMA CLARO (con el switch) ═══════════ */
+
+  /* Superficies */
+  --bg:            #F7F8FA;
+  --surface:       #FFFFFF;
+  --surface-2:     #F2F4F7;
+  --border:        #E4E7EC;
+  --border-strong: #D0D5DD;
+
+  /* Texto */
+  --ink:       #101828;
+  --ink-2:     #475467;
+  --ink-3:     #98A2B3;
+
+  /* Acción */
+  --accent:       #2B50D8;
+  --accent-hover: #2140B5;
+  --accent-text:  #2B50D8;
+  --accent-tint:  #EEF2FF;
+
+  /* Semántica */
+  --income:       #067647;
+  --income-tint:  #ECFDF3;
+  --expense:      #B42318;
+  --expense-tint: #FEF3F2;
+  --warning:      #B54708;
+  --warning-tint: #FFFAEB;
+
+  /* Sombras */
+  --shadow-pop: 0 8px 24px rgba(16, 24, 40, 0.10), 0 2px 6px rgba(16, 24, 40, 0.06);
 }
 
 /* Clase para TODA cifra monetaria */
