@@ -16,10 +16,17 @@ export const routes: Routes = [
 
   // Rutas privadas — solo pasan si hay sesión
   {
-    path: 'dashboard',
-    canActivate: [authenticationGuard],
+    path: '',
     loadComponent: () =>
-      import('./features/dashboard/dashboard').then(m => m.Dashboard)
+      import('./layout/main-layout/main-layout').then(m => m.MainLayout),
+    canActivate: [authenticationGuard],
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./features/dashboard/dashboard').then(m => m.Dashboard),
+      },
+    ],
   },
 
   // Redirecciones

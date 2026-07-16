@@ -1,0 +1,41 @@
+.layout {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* ── MOBILE primero (el default, sin media query) ── */
+
+.layout__sidebar {
+  display: none;              /* en mobile, el sidebar NO se muestra */
+}
+
+.layout__content {
+  padding: var(--s-4);
+  padding-bottom: calc(var(--s-16) + var(--s-4));  /* espacio para la barra inferior */
+}
+
+.layout__bottom-nav {
+  display: block;            /* en mobile, SÍ se muestra la barra inferior */
+}
+
+/* ── DESKTOP: a partir de 768px ── */
+
+@media (min-width: 768px) {
+  .layout {
+    display: flex;
+  }
+
+  .layout__sidebar {
+    display: block;          /* en desktop, aparece el sidebar */
+  }
+
+  .layout__content {
+    flex: 1;
+    padding: var(--s-8);
+    padding-bottom: var(--s-8);  /* ya no hace falta espacio abajo */
+  }
+
+  .layout__bottom-nav {
+    display: none;           /* en desktop, se oculta la barra inferior */
+  }
+}

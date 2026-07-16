@@ -1,0 +1,8 @@
+<nav class="bottom-nav">
+  @for (item of navigationItems; track item.route) {
+    <a [routerLink]="item.route" routerLinkActive="bottom-nav__link--active" class="bottom-nav__link">
+      <lucide-icon [img]="iconMap[item.icon]" [size]="22" />
+      <span class="bottom-nav__label">{{ item.label }}</span>
+    </a>
+  }
+</nav>
