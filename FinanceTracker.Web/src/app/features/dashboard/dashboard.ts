@@ -1,12 +1,13 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ReportService } from '../../core/services/report.service';
-import { MonthlySummary, CategoryExpense } from '../../core/models/report.model';
+import { MonthlySummary, CategoryExpense, MonthlyEvolution } from '../../core/models/report.model';
 import { CategoryExpensesChart } from './components/category-expenses-chart/category-expenses-chart';
+import { MonthlyEvolutionChart } from './components/monthly-evolution-chart/monthly-evolution-chart';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CategoryExpensesChart, DecimalPipe],
+  imports: [CategoryExpensesChart, MonthlyEvolutionChart, DecimalPipe],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
@@ -16,6 +17,7 @@ export class Dashboard implements OnInit {
 
   protected readonly summary = signal<MonthlySummary | null> (null);
   protected readonly categoryExpenses = signal<CategoryExpense []> ([]);
+  protected readonly monthlyEvolution = signal<MonthlyEvolution[]>([]);
   protected readonly isLoading = signal(true);
 
   ngOnInit(): void {
@@ -25,6 +27,7 @@ export class Dashboard implements OnInit {
 
     this.reportService.getMonthlySummary(currentMonth, currentYear).subscribe({
       next: (data) => this.summary.set(data),
+      error: () => this.isLoading.set(false),
     });
 
     this.reportService.getExpensesByCategory(currentMonth, currentYear).subscribe({
@@ -35,5 +38,9 @@ export class Dashboard implements OnInit {
       error: () => this.isLoading.set(false),
     });
 
+    this.reportService.getMonthlyEvolution(currentYear).subscribe({
+      next:(data) => this.monthlyEvolution.set(data),
+      error: () => this.isLoading.set(false),
+    });
   }
 }
