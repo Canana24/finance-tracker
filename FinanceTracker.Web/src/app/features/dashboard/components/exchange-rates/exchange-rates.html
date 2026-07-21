@@ -1,0 +1,20 @@
+<div class="exchange-rates">
+  <h2 class="exchange-rates__title">Cotizaciones</h2>
+
+  @if (isLoading()) {
+    <p class="exchange-rates__message">Cargando cotizaciones…</p>
+  } @else if (hasError()) {
+    <p class="exchange-rates__message">No se pudieron cargar las cotizaciones.</p>
+  } @else {
+    <ul class="exchange-rates__list">
+      @for (rate of rates(); track rate.currencyCode) {
+        <li class="exchange-rates__item">
+          <span class="exchange-rates__currency">{{ rate.currencyCode }}</span>
+          <span class="amount exchange-rates__value">
+            $ {{ rate.rate | number:'1.2-2' }}
+          </span>
+        </li>
+      }
+    </ul>
+  }
+</div>

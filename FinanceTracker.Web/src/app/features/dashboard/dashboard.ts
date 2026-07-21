@@ -3,11 +3,12 @@ import { ReportService } from '../../core/services/report.service';
 import { MonthlySummary, CategoryExpense, MonthlyEvolution } from '../../core/models/report.model';
 import { CategoryExpensesChart } from './components/category-expenses-chart/category-expenses-chart';
 import { MonthlyEvolutionChart } from './components/monthly-evolution-chart/monthly-evolution-chart';
+import { ExchangeRates } from './components/exchange-rates/exchange-rates';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CategoryExpensesChart, MonthlyEvolutionChart, DecimalPipe],
+  imports: [CategoryExpensesChart, MonthlyEvolutionChart, ExchangeRates, DecimalPipe],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
