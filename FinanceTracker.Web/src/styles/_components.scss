@@ -92,3 +92,13 @@
   font-size: 13px;
   color: var(--expense);
 }
+
+.button--danger {
+  background: var(--expense);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: var(--expense);
+    filter: brightness(0.92);
+  }
+}
