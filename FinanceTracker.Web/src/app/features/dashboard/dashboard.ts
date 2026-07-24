@@ -13,7 +13,6 @@ import { DecimalPipe } from '@angular/common';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard implements OnInit {
-
   private reportService = inject(ReportService);
 
   protected readonly summary = signal<MonthlySummary | null> (null);

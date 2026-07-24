@@ -12,7 +12,6 @@ import { ThemeToggle } from '../../shared/components/theme-toggle/theme-toggle';
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
-
   private authenticationService = inject(AuthService);
   protected readonly navigationItems = navigationItems;
 
