@@ -6,6 +6,7 @@ export interface Transaction
     accountId: number;
     accountName: string;
     categoryName: string;
+    categoryId: number;
     amount: number;
     type: CategoryType;
     description: string | null;

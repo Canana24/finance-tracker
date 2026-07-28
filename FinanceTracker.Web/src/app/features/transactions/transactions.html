@@ -1,0 +1,152 @@
+<div class="page">
+
+  <header class="page__header">
+    <h1 class="page__title">Movimientos</h1>
+    <button type="button" class="button button--primary" (click)="openCreateModal()">
+      Nuevo movimiento
+    </button>
+  </header>
+
+  @if (isLoading()) {
+    <p class="page__message">Cargando…</p>
+  } @else if (transactions().length === 0) {
+    <p class="page__message">Todavía no tenés movimientos. Registrá el primero.</p>
+  } @else {
+    <ul class="transaction-list">
+      @for (transaction of transactions(); track transaction.id) {
+        <li class="transaction-item">
+
+          <div class="transaction-item__info">
+            <span class="transaction-item__title">
+              {{ transaction.description || transaction.categoryName }}
+            </span>
+            <span class="transaction-item__meta">
+              {{ transaction.categoryName }} · {{ transaction.accountName }} · {{ transaction.date | date:'d MMM' }}
+            </span>
+          </div>
+
+          <div class="transaction-item__right">
+            <span
+              class="amount transaction-item__amount"
+              [class.amount--in]="transaction.type === 'INCOME'"
+              [class.amount--out]="transaction.type === 'EXPENSE'"
+            >
+              {{ transaction.type === 'INCOME' ? '+' : '−' }} {{ transaction.amount | number:'1.2-2' }}
+            </span>
+            <div class="transaction-item__actions">
+              <button type="button" class="transaction-item__edit" (click)="openEditModal(transaction)">
+                Editar
+              </button>
+              <button type="button" class="transaction-item__delete" (click)="askDeleteConfirmation(transaction)" aria-label="Borrar movimiento">
+                <lucide-icon [img]="trashIcon" [size]="18" />
+              </button>
+            </div>
+          </div>
+
+        </li>
+      }
+    </ul>
+  }
+
+</div>
+
+<!-- ═══ MODAL crear/editar-->
+@if (isModalOpen()) {
+  <app-modal
+    [title]="editingTransactionId() === null ? 'Nuevo movimiento' : 'Editar movimiento'"
+    (close)="closeModal()"
+  >
+    <form [formGroup]="transactionForm" (ngSubmit)="saveTransaction()" novalidate>
+
+      @if (editingTransactionId() === null) {
+        <div class="field">
+          <label class="field__label" for="type">Tipo</label>
+          <select id="type" class="field__input" formControlName="type" (change)="onTransactionTypeChange()">
+            <option value="EXPENSE">Gasto</option>
+            <option value="INCOME">Ingreso</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="accountId">Cuenta</label>
+          <select id="accountId" class="field__input" formControlName="accountId">
+            <option value="0" disabled>Elegí una cuenta</option>
+            @for (account of accounts(); track account.id) {
+              <option [value]="account.id">{{ account.name }} ({{ account.currencyCode }})</option>
+            }
+          </select>
+          @if (transactionForm.controls.accountId.touched && transactionForm.controls.accountId.invalid) {
+            <p class="field__error">Elegí una cuenta.</p>
+          }
+        </div>
+      }
+
+      <div class="field">
+        <label class="field__label" for="categoryId">Categoría</label>
+        <select id="categoryId" class="field__input" formControlName="categoryId">
+          <option value="0" disabled>Elegí una categoría</option>
+          @for (category of availableCategories(); track category.id) {
+            <option [value]="category.id">{{ category.name }}</option>
+          }
+        </select>
+        @if (transactionForm.controls.categoryId.touched && transactionForm.controls.categoryId.invalid) {
+          <p class="field__error">Elegí una categoría.</p>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="amount">Monto</label>
+        <input
+          id="amount"
+          type="number"
+          step="0.01"
+          class="field__input field__input--amount"
+          formControlName="amount"
+          [attr.aria-invalid]="(transactionForm.controls.amount.touched && transactionForm.controls.amount.invalid) ? 'true' : null"
+        />
+        @if (transactionForm.controls.amount.touched && transactionForm.controls.amount.invalid) {
+          <p class="field__error">Ingresá un monto mayor a cero.</p>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="date">Fecha</label>
+        <input id="date" type="date" class="field__input" formControlName="date" />
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="description">Descripción (opcional)</label>
+        <input id="description" type="text" class="field__input" formControlName="description" />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="button button--secondary" (click)="closeModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="button button--primary" [disabled]="isSaving()">
+          {{ isSaving() ? 'Guardando…' : 'Guardar' }}
+        </button>
+      </div>
+
+    </form>
+  </app-modal>
+}
+
+<!--MODAL confirmar borrado-->
+@if (deletingTransaction(); as transaction) {
+  <app-modal title="Borrar movimiento" (close)="cancelDelete()">
+    <p class="delete-confirmation">
+      ¿Seguro que querés borrar este movimiento de
+      <strong>{{ transaction.amount | number:'1.2-2' }}</strong>?
+      El saldo de la cuenta se va a ajustar automáticamente.
+    </p>
+    <div class="modal-actions">
+      <button type="button" class="button button--secondary" (click)="cancelDelete()">
+        Cancelar
+      </button>
+      <button type="button" class="button button--danger" (click)="confirmDelete()" [disabled]="isSaving()">
+        {{ isSaving() ? 'Borrando…' : 'Borrar' }}
+      </button>
+    </div>
+  </app-modal>
+}
