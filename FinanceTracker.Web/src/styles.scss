@@ -1,0 +1,48 @@
+/*  Fuentes 
+@use '@fontsource/ibm-plex-sans/400.css';
+@use '@fontsource/ibm-plex-sans/500.css';
+@use '@fontsource/ibm-plex-sans/600.css';
+@use '@fontsource/ibm-plex-mono/400.css';
+@use '@fontsource/ibm-plex-mono/500.css'; */
+
+@use 'styles/tokens';
+@use 'styles/components';
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Titulos*/
+h1, h2, h3, p {
+  margin: 0;
+}
+
+/* Foco visible siempre */
+:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(43, 80, 216, 0.12);
+}
+
+/* Menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

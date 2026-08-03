@@ -1,0 +1,104 @@
+<div class="page">
+
+  <header class="page__header">
+    <h1 class="page__title">Categorías</h1>
+    <button type="button" class="button button--primary" (click)="openCreateModal()">
+      Nueva categoría
+    </button>
+  </header>
+
+  @if (isLoading()) {
+    <p class="page__message">Cargando…</p>
+  } @else if (categories().length === 0) {
+    <p class="page__message">Todavía no tenés categorías. Creá la primera.</p>
+  } @else {
+    <ul class="category-list">
+      @for (category of categories(); track category.id) {
+        <li class="category-item">
+          <div class="category-item__info">
+            <span class="category-item__name">{{ category.name }}</span>
+            <span
+              class="category-item__type"
+              [class.category-item__type--income]="category.type === 'INCOME'"
+              [class.category-item__type--expense]="category.type === 'EXPENSE'"
+            >
+              {{ category.type === 'INCOME' ? 'Ingreso' : 'Gasto' }}
+            </span>
+          </div>
+          <div class="category-item__actions">
+            <button type="button" class="category-item__edit" (click)="openEditModal(category)">
+              Editar
+            </button>
+            <button type="button" class="category-item__delete" (click)="askDeleteConfirmation(category)" aria-label="Borrar categoría">
+              <lucide-icon [img]="trashIcon" [size]="18" />
+            </button>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+
+</div>
+
+<!-- MODAL Crear/Editar -->
+@if (isModalOpen()) {
+  <app-modal
+    [title]="editingCategoryId() === null ? 'Nueva categoría' : 'Editar categoría'"
+    (close)="closeModal()"
+  >
+    <form [formGroup]="categoryForm" (ngSubmit)="saveCategory()" novalidate>
+
+      <div class="field">
+        <label class="field__label" for="name">Nombre</label>
+        <input
+          id="name"
+          type="text"
+          class="field__input"
+          formControlName="name"
+          [attr.aria-invalid]="(categoryForm.controls.name.touched && categoryForm.controls.name.invalid) ? 'true' : null"
+        />
+        @if (categoryForm.controls.name.touched && categoryForm.controls.name.invalid) {
+          <p class="field__error">Ingresá un nombre (mínimo 2 caracteres).</p>
+        }
+      </div>
+
+      @if (editingCategoryId() === null) {
+        <div class="field">
+          <label class="field__label" for="type">Tipo</label>
+          <select id="type" class="field__input" formControlName="type">
+            <option value="EXPENSE">Gasto</option>
+            <option value="INCOME">Ingreso</option>
+          </select>
+        </div>
+      }
+
+      <div class="modal-actions">
+        <button type="button" class="button button--secondary" (click)="closeModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="button button--primary" [disabled]="isSaving()">
+          {{ isSaving() ? 'Guardando…' : 'Guardar' }}
+        </button>
+      </div>
+
+    </form>
+  </app-modal>
+}
+
+<!--MODAL Borrar -->
+@if (deletingCategory(); as category) {
+  <app-modal title="Borrar categoría" (close)="cancelDelete()">
+    <p class="delete-confirmation">
+      ¿Seguro que querés borrar la categoría <strong>{{ category.name }}</strong>?
+      Los movimientos que la usan se conservan en el historial.
+    </p>
+    <div class="modal-actions">
+      <button type="button" class="button button--secondary" (click)="cancelDelete()">
+        Cancelar
+      </button>
+      <button type="button" class="button button--danger" (click)="confirmDelete()" [disabled]="isSaving()">
+        {{ isSaving() ? 'Borrando…' : 'Borrar' }}
+      </button>
+    </div>
+  </app-modal>
+}

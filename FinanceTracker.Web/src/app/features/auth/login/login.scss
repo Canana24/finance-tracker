@@ -1,0 +1,93 @@
+.auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-4);
+
+  /* Fondo con profundidad — le da al vidrio algo que difuminar.
+     Todo dentro de la paleta: ink oscuro + acento azul. */
+  background:
+    radial-gradient(circle at 18% 20%, #2B50D8 0%, transparent 42%),
+    radial-gradient(circle at 82% 78%, #6478E8 0%, transparent 38%),
+    linear-gradient(135deg, #101828 0%, #1B2A5B 55%, #2140B5 100%);
+}
+
+/* La tarjeta de vidrio esmerilado */
+.auth__card {
+  width: 100%;
+  max-width: 380px;
+  padding: var(--s-8) var(--s-6);
+  border-radius: var(--r-lg);
+
+  /* El efecto vidrio: fondo oscuro translúcido + desenfoque de lo que hay detrás */
+  background: rgba(16, 24, 40, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);          /* Safari */
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 48px rgba(16, 24, 40, 0.35);
+}
+
+.auth__header {
+  margin-bottom: var(--s-6);
+}
+
+.auth__title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.auth__subtitle {
+  margin-top: var(--s-1);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.auth__alert {
+  margin-bottom: var(--s-4);
+  padding: var(--s-3);
+  border-radius: var(--r);
+  background: rgba(180, 35, 24, 0.22);
+  color: #FDA29B;
+  font-size: 14px;
+}
+
+.auth__footer {
+  margin-top: var(--s-6);
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.auth__link {
+  color: #9CB0FF;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ── Override de los campos SOLO dentro del login ──
+   Los inputs globales son texto oscuro sobre blanco.
+   Acá, sobre vidrio oscuro, los pasamos a texto claro. */
+.field__label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.field__input {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &:focus {
+    border-color: #9CB0FF;
+    box-shadow: 0 0 0 3px rgba(156, 176, 255, 0.22);
+  }
+}
