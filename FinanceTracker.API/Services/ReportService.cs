@@ -38,7 +38,7 @@ namespace FinanceTracker.API.Services
                 Month = month,
                 Year = year,
                 TotalIncome = totalIncome,
-                TotalExpenses = totalExpense,
+                TotalExpense = totalExpense,
                 Savings = totalIncome - totalExpense,
                 TransactionCount = transactions.Count()
             };
