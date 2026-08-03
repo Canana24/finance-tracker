@@ -112,3 +112,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
+// Necesario para que WebApplicationFactory<Program> pueda referenciar este tipo desde el proyecto de tests.
+public partial class Program { }

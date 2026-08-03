@@ -37,7 +37,8 @@ namespace FinanceTracker.API.Services
                 Type = dto.Type,
                 Icon = dto.Icon,
                 CreatedAt = DateTime.UtcNow,
-                CreatedBy = userId
+                CreatedBy = userId,
+                IsActive = true
             };
             var created = await _categoryRepository.CreateCategory(category);
             return MapToResponseDto(created);

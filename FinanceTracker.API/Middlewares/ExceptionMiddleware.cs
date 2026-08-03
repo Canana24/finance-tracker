@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using FinanceTracker.API.Exceptions;
+using System.Net;
 using System.Text.Json;
 
 namespace FinanceTracker.API.Middlewares
@@ -29,16 +30,23 @@ namespace FinanceTracker.API.Middlewares
 
         private static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
+            var statusCode = ex switch
+            {
+                ConflictException => (int)HttpStatusCode.Conflict,// 409
+                UnauthorizedException => (int)HttpStatusCode.Unauthorized, //401
+                ArgumentException => (int)HttpStatusCode.BadRequest, //400
+                _ => (int)HttpStatusCode.InternalServerError  // 500
+            };
+
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = statusCode;
 
             var response = new
             {
-                status = context.Response.StatusCode,
-                message = "Ocurrió un error interno en el servidor.",
+                status = statusCode,
+                message = (statusCode == (int)HttpStatusCode.Conflict || statusCode == (int)HttpStatusCode.Unauthorized) ? ex.Message : "Ocurrió un error interno en el servidor.",
                 detail = ex.Message
             };
-
             return context.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
     }

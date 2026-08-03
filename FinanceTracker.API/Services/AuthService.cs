@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FinanceTracker.API.Exceptions;
 
 namespace FinanceTracker.API.Services
 {
@@ -26,7 +27,7 @@ namespace FinanceTracker.API.Services
             var existingUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == dto.Email);
             if (existingUser != null)
-                throw new Exception("La casillla de correo ya está registrada.");
+                throw new ConflictException("La casilla de correo ya está registrada.");
 
             var userRole = await _context.Roles
                 .FirstOrDefaultAsync(r => r.Name == "USER");
@@ -56,12 +57,12 @@ namespace FinanceTracker.API.Services
                 .FirstOrDefaultAsync(u => u.Email == dto.Email && u.IsActive == true);
 
             if (user == null)
-                throw new Exception("Email o contraseña incorrectos.");
+                throw new UnauthorizedException("El email o la contraseña no coinciden.");
 
             var isValidPassword = BCrypt.Net.BCrypt.Verify(dto.Password, user.Password);
 
             if (!isValidPassword)
-                throw new Exception("Email o contraseña incorrectos.");
+                throw new UnauthorizedException("El email o la contraseña no coinciden.");
 
             return GenerateToken(user, user.Role!.Name!);
         }
