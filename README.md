@@ -4,7 +4,7 @@ Aplicación full-stack de finanzas personales pensada para el contexto uruguayo,
 
 Permite registrar ingresos y gastos en varias cuentas y monedas, y ver todo consolidado en un único panel — con los montos convertidos usando la cotización vigente **en la fecha de cada movimiento*.
 
-Este proyecto se desarrolló con Claude como mentor técnico: explicaba conceptos,
+>Este proyecto se desarrolló con Claude como mentor técnico: explicaba conceptos,
 > señalaba riesgos de seguridad y proponía alternativas con sus trade-offs. Cada
 > decisión de diseño, y todo el código, fue escrito por mí — Claude no generó
 > commits ni tocó el repositorio directamente (con la excepción puntual de la
