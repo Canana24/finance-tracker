@@ -10,11 +10,11 @@ Permite registrar ingresos y gastos en varias cuentas y monedas, y ver todo cons
 
 ## Capturas
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](docs/dashboard.png)
 
 | Login | Movimientos |
 |---|---|
-| ![Login](docs/screenshots/login.png) | ![Movimientos](docs/screenshots/movimientos.png) |
+| ![Login](docs/login.png) | ![Movimientos](docs/movimientos.png) |
 
 <!-- TODO: agregar el link a la demo cuando esté desplegada -->
 <!-- **Demo en vivo:** https://... -->
