@@ -81,7 +81,6 @@ En capas, con interfaces en cada límite:
 
 ```
 Controller  →  Service  →  Repository  →  DbContext  →  SQL Server
-
 ```
 
 ```
