@@ -2,7 +2,7 @@
 
 Aplicación full-stack de finanzas personales pensada para el contexto uruguayo, donde es habitual manejar pesos y dólares al mismo tiempo.
 
-Permite registrar ingresos y gastos en varias cuentas y monedas, y ver todo consolidado en un único panel — con los montos convertidos usando la cotización vigente **en la fecha de cada movimiento**, no la de hoy.
+Permite registrar ingresos y gastos en varias cuentas y monedas, y ver todo consolidado en un único panel — con los montos convertidos usando la cotización vigente **en la fecha de cada movimiento*.
 
 > **Estado:** en desarrollo activo. El núcleo está completo y funcionando (autenticación, cuentas, categorías, movimientos, reportes y dashboard), con cobertura de tests en backend y frontend. Ver [Roadmap](#roadmap) para lo que sigue.
 
