@@ -81,8 +81,7 @@ En capas, con interfaces en cada límite:
 
 ```
 Controller  →  Service  →  Repository  →  DbContext  →  SQL Server
-   HTTP        reglas       acceso
-              de negocio    a datos
+
 ```
 
 ```
