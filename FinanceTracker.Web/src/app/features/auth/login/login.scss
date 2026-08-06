@@ -91,3 +91,38 @@
     box-shadow: 0 0 0 3px rgba(156, 176, 255, 0.22);
   }
 }
+
+.field__password-wrapper {
+position: relative;
+}
+
+.field__toggle-visibility {
+  position: absolute;
+  right: var(--s-2);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--r);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.field__password-wrapper .field__input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}

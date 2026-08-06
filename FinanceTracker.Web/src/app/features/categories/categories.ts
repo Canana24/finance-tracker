@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, computed } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../core/services/category.service';
 import { Category, CategoryType } from '../../core/models/category.model';
@@ -27,6 +27,12 @@ export class Categories implements OnInit {
   protected readonly categoryForm = this.formBuilder.nonNullable.group({
     name: ['',[Validators.required, Validators.minLength(2)]],
     type: ['EXPENSE' as CategoryType, [Validators.required]],
+  });
+
+  protected readonly categoryFilter = signal <'ALL' | CategoryType> ('ALL');
+  protected readonly filteredCategories = computed(() => {
+    const filter = this.categoryFilter();
+    return filter === 'ALL' ? this.categories() : this.categories().filter(category => category.type === filter);
   });
 
   ngOnInit(): void {

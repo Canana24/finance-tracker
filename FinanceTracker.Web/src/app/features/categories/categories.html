@@ -1,19 +1,45 @@
 <div class="page">
 
   <header class="page__header">
-    <h1 class="page__title">Categorías</h1>
+   <!--  <h1 class="page__title">Categorías</h1> -->
     <button type="button" class="button button--primary" (click)="openCreateModal()">
       Nueva categoría
     </button>
   </header>
+  <div class="category-filter">
+    <button
+      type="button"
+      class="category-filter__button"
+      [class.category-filter__button--active]="categoryFilter() === 'ALL'"
+      (click)="categoryFilter.set('ALL')"
+    >
+      Todas
+    </button>
+    <button
+      type="button"
+      class="category-filter__button"
+      [class.category-filter__button--active]="categoryFilter() === 'INCOME'"
+      (click)="categoryFilter.set('INCOME')"
+    >
+      Ingreso
+    </button>
+    <button
+      type="button"
+      class="category-filter__button"
+      [class.category-filter__button--active]="categoryFilter() === 'EXPENSE'"
+      (click)="categoryFilter.set('EXPENSE')"
+    >
+      Gasto
+    </button>
+</div>
 
   @if (isLoading()) {
     <p class="page__message">Cargando…</p>
-  } @else if (categories().length === 0) {
+  } @else if (filteredCategories().length === 0) {
     <p class="page__message">Todavía no tenés categorías. Creá la primera.</p>
   } @else {
     <ul class="category-list">
-      @for (category of categories(); track category.id) {
+      @for (category of filteredCategories(); track category.id) {
         <li class="category-item">
           <div class="category-item__info">
             <span class="category-item__name">{{ category.name }}</span>

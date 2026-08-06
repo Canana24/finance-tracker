@@ -1,6 +1,24 @@
 .dashboard {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.dashboard__main {
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .dashboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: var(--s-6);
+    align-items: start;
+  }
+
+  .dashboard__sidebar {
+    position: sticky;
+    top: var(--s-6);
+  }
 }
 
 .dashboard__header {
@@ -53,7 +71,8 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  margin-bottom: var(--s-6); 
+  margin-bottom: var(--s-6);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
 }
 
 .chart-card__title {

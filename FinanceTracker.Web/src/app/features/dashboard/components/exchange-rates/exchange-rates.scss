@@ -1,22 +1,21 @@
 .exchange-rates {
-  padding: var(--s-6);
+  padding: var(--s-4);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  margin-bottom: var(--s-6);
 }
 
 .exchange-rates__title {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--ink);
-  margin-bottom: var(--s-4);
+  margin-bottom: var(--s-3);
 }
 
 .exchange-rates__message {
   color: var(--ink-3);
-  font-size: 14px;
-  padding: var(--s-4) 0;
+  font-size: 13px;
+  padding: var(--s-3) 0;
 }
 
 .exchange-rates__list {
@@ -32,7 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--s-3);
+  padding: var(--s-2);
   border-radius: var(--r);
   transition: background-color 0.15s ease;
 
@@ -42,12 +41,12 @@
 }
 
 .exchange-rates__currency {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--ink);
 }
 
 .exchange-rates__value {
-  font-size: 15px;
+  font-size: 13px;
   color: var(--ink-2);
 }

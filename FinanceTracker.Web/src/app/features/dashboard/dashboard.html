@@ -1,56 +1,62 @@
 <div class="dashboard">
 
-  <header class="dashboard__header">
-    <h1 class="dashboard__title">Inicio</h1>
-  </header>
+  <div class="dashboard__main">
 
-  @if (summary(); as monthSummary) {
-    <section class="summary-cards">
+    <!-- <header class="dashboard__header">
+      <h1 class="dashboard__title">Inicio</h1>
+    </header> -->
 
-      <article class="summary-card">
-        <span class="summary-card__label">Ingresos del mes</span>
-        <span class="amount amount--in summary-card__value">
-          $ {{ monthSummary.totalIncome | number:'1.2-2' }}
-        </span>
-      </article>
+    @if (summary(); as monthSummary) {
+      <section class="summary-cards">
 
-      <article class="summary-card">
-        <span class="summary-card__label">Gastos del mes</span>
-        <span class="amount amount--out summary-card__value">
-          $ {{ monthSummary.totalExpense | number:'1.2-2' }}
-        </span>
-      </article>
+        <article class="summary-card">
+          <span class="summary-card__label">Ingresos del mes</span>
+          <span class="amount amount--in summary-card__value">
+            $ {{ monthSummary.totalIncome | number:'1.2-2' }}
+          </span>
+        </article>
 
-      <article class="summary-card">
-        <span class="summary-card__label">Ahorro</span>
-        <span
-          class="amount summary-card__value"
-          [class.amount--in]="monthSummary.savings >= 0"
-          [class.amount--out]="monthSummary.savings < 0"
-        >
-          $ {{ monthSummary.savings | number:'1.2-2' }}
-        </span>
-      </article>
+        <article class="summary-card">
+          <span class="summary-card__label">Gastos del mes</span>
+          <span class="amount amount--out summary-card__value">
+            $ {{ monthSummary.totalExpense | number:'1.2-2' }}
+          </span>
+        </article>
 
-    </section>
-  }
+        <article class="summary-card">
+          <span class="summary-card__label">Ahorro</span>
+          <span
+            class="amount summary-card__value"
+            [class.amount--in]="monthSummary.savings >= 0"
+            [class.amount--out]="monthSummary.savings < 0"
+          >
+            $ {{ monthSummary.savings | number:'1.2-2' }}
+          </span>
+        </article>
 
-  <section class="chart-card">
-    <h2 class="chart-card__title">Gastos por categoría</h2>
-
-    @if (isLoading()) {
-      <p class="chart-card__empty">Cargando…</p>
-    } @else if (categoryExpenses().length === 0) {
-      <p class="chart-card__empty">No hay gastos registrados este mes.</p>
-    } @else {
-      <app-category-expenses-chart [expenses]="categoryExpenses()" />
+      </section>
     }
-  </section>
 
-  <section class="chart-card">
-    <h2 class="chart-card__title">Ingresos vs Gastos</h2>
-    <app-monthly-evolution-chart [evolution]="monthlyEvolution()" />
-  </section>
+    <section class="chart-card">
+      <h2 class="chart-card__title">Gastos por categoría</h2>
+      @if (isLoading()) {
+        <p class="chart-card__empty">Cargando…</p>
+      } @else if (categoryExpenses().length === 0) {
+        <p class="chart-card__empty">No hay gastos registrados este mes.</p>
+      } @else {
+        <app-category-expenses-chart [expenses]="categoryExpenses()" />
+      }
+    </section>
 
-  <app-exchange-rates />
+    <section class="chart-card">
+      <h2 class="chart-card__title">Ingresos vs Gastos</h2>
+      <app-monthly-evolution-chart [evolution]="monthlyEvolution()" />
+    </section>
+
+  </div>
+
+  <aside class="dashboard__sidebar">
+    <app-exchange-rates />
+  </aside>
+
 </div>
