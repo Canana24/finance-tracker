@@ -4,14 +4,18 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeToggle } from '../../../shared/components/theme-toggle/theme-toggle';
 import { single } from 'rxjs';
+import { LucideAngularModule, Eye, EyeOff } from 'lucide-angular';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, RouterLink, ThemeToggle],
+  imports: [ReactiveFormsModule, RouterLink, ThemeToggle, LucideAngularModule],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
 export class Register {
+  readonly isPasswordVisible = signal(false);
+  protected readonly eyeIcon = Eye;
+  protected readonly eyeOffIcon = EyeOff;
 
   private formBuilder = inject(FormBuilder);
   private authenticationService = inject(AuthService);
